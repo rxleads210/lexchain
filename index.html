@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lexchain Advisory — Rechtliche Beratung für Kryptowährungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: #080c14;
+  color: #d8d2c4;
+  font-family: 'Syne', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── CSS Variables ── */
+:root {
+  --bg-deep: #080c14;
+  --bg-mid: #0d1220;
+  --bg-surface: #111827;
+  --bg-card: #131c2e;
+  --accent: #c9a96e;
+  --accent-dim: #8b6f42;
+  --accent-glow: rgba(201,169,110,0.12);
+  --text-primary: #ede8df;
+  --text-secondary: #9a9488;
+  --text-muted: #55524c;
+  --border: rgba(201,169,110,0.12);
+  --border-mid: rgba(201,169,110,0.2);
+  --border-light: rgba(201,169,110,0.35);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Syne', sans-serif;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+/* ── Utility ── */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+.accent { color: var(--accent); }
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(.22,.68,0,1.2), transform 0.8s cubic-bezier(.22,.68,0,1.2);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.25rem 0;
+  transition: background 0.4s, border-color 0.4s, padding 0.3s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(8,12,20,0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--border);
+  padding: 0.9rem 0;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text-primary); }
+.nav-cta {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent) !important;
+  border: 1px solid var(--accent-dim);
+  padding: 0.5rem 1.25rem;
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s !important;
+}
+.nav-cta:hover {
+  background: var(--accent-glow) !important;
+  color: var(--accent) !important;
+}
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--text-secondary);
+  transition: all 0.3s;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg-deep);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--accent); }
+.mobile-close {
+  position: absolute;
+  top: 1.5rem; right: 2rem;
+  background: none; border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: var(--serif);
+}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 8rem 0 5rem;
+}
+
+/* Geometric SVG background */
+.hero-geo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-geo svg {
+  position: absolute;
+  top: 0; right: -5%;
+  width: 65%;
+  height: 100%;
+  opacity: 0.065;
+}
+
+/* Subtle grain overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 780px; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.08;
+  margin-bottom: 1.75rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.4s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 1s 0.6s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.85rem 2.25rem;
+  background: var(--accent);
+  color: #0a0e1a;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: opacity 0.2s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-block;
+  padding: 0.85rem 2.25rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid var(--border-mid);
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: var(--border-light);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* Animated line at bottom of hero */
+.hero-line {
+  position: absolute;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 1s 1.2s forwards;
+}
+.hero-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.hero-scroll-bar {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent-dim), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* ─────────────────────────────────────────
+   CREDIBILITY BAR
+───────────────────────────────────────── */
+.cred-bar {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.35rem 0;
+  overflow: hidden;
+}
+.cred-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.cred-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.25rem 2.5rem;
+  border-right: 1px solid var(--border);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.cred-item:last-child { border-right: none; }
+.cred-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   SECTION SHARED
+───────────────────────────────────────── */
+section { padding: 7rem 0; }
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.67rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.section-label::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--accent);
+}
+.section-title {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 300;
+  margin-bottom: 1.25rem;
+  line-height: 1.1;
+}
+.section-sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 540px;
+  line-height: 1.75;
+}
+
+/* ─────────────────────────────────────────
+   SERVICES
+───────────────────────────────────────── */
+.services { background: var(--bg-mid); }
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.service-card {
+  background: var(--bg-card);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
+.service-card:hover { background: #161f32; }
+.service-card:hover::before { width: 100%; }
+
+.service-num {
+  font-family: var(--serif);
+  font-size: 0.7rem;
+  color: var(--accent-dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.service-icon {
+  width: 36px; height: 36px;
+  margin-bottom: 1.25rem;
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.service-card h3 {
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.service-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────
+   HOW WE WORK
+───────────────────────────────────────── */
+.process { background: var(--bg-deep); }
+
+.process-header { text-align: center; margin-bottom: 5rem; }
+.process-header .section-label { justify-content: center; }
+.process-header .section-sub { margin: 0 auto; text-align: center; }
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+  gap: 3rem;
+}
+
+/* Connecting line */
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: calc(16.67% + 1.5rem);
+  right: calc(16.67% + 1.5rem);
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent-dim));
+  border-top: 1px dashed var(--border-mid);
+}
+
+.process-step { text-align: center; }
+
+.step-num-wrap {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  background: var(--bg-deep);
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.process-step h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+.process-step p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ─────────────────────────────────────────
+   WHY US
+───────────────────────────────────────── */
+.why-us {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 5rem 0;
+}
+.why-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.why-item {
+  background: var(--bg-card);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+.why-stat {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 4vw, 4rem);
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.why-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ─────────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────────── */
+.testimonials { background: var(--bg-mid); }
+.testimonials-header { text-align: center; margin-bottom: 4rem; }
+.testimonials-header .section-label { justify-content: center; }
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2.75rem 2.5rem;
+  position: relative;
+}
+.testimonial-card::before {
+  content: '\201C';
+  font-family: var(--serif);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.2;
+  position: absolute;
+  top: 1rem; left: 1.75rem;
+}
+
+.testimonial-text {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.testimonial-line {
+  width: 24px; height: 1px;
+  background: var(--accent-dim);
+}
+.testimonial-who {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ─────────────────────────────────────────
+   CONTACT
+───────────────────────────────────────── */
+.contact { background: var(--bg-deep); }
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6rem;
+  align-items: start;
+}
+.contact-left .section-title { margin-bottom: 1.5rem; }
+.contact-left p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+.contact-detail-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  flex-shrink: 0;
+}
+
+/* Form */
+.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.45rem; }
+.form-group label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0.85rem 1rem;
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 300;
+  transition: border-color 0.2s;
+  outline: none;
+  width: 100%;
+  -webkit-appearance: none;
+}
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23635f57' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+.form-group select option { background: var(--bg-surface); }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-dim);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+.form-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-error {
+  font-size: 0.75rem;
+  color: #e27070;
+  min-height: 1em;
+}
+
+.form-success {
+  display: none;
+  background: rgba(201,169,110,0.08);
+  border: 1px solid var(--border-mid);
+  border-radius: 2px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.form-success p {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+.form-success span {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  padding: 4rem 0 2.5rem;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.footer-brand .nav-logo { display: inline-block; margin-bottom: 0.75rem; }
+.footer-tagline {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 260px;
+  line-height: 1.65;
+}
+.footer-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--text-primary); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-disclaimer {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 600px;
+}
+.footer-copy {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+  .contact-left p { max-width: 480px; }
+  .why-inner { grid-template-columns: 1fr; }
+  .why-item { padding: 2rem 2rem; }
+  .process-steps::before { display: none; }
+  .process-steps { grid-template-columns: 1fr; gap: 2rem; }
+  .process-step { text-align: left; }
+  .step-num-wrap { margin: 0 0 1.5rem; }
+}
+
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .services-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.6rem; }
+  section { padding: 5rem 0; }
+  .services-header { flex-direction: column; align-items: flex-start; }
+  .form-row { grid-template-columns: 1fr; }
+  .cred-item { padding: 0.4rem 1.25rem; }
+  .footer-top { flex-direction: column; }
+  .footer-links { flex-wrap: wrap; gap: 1.25rem; }
+  .footer-bottom { flex-direction: column; }
+}
+
+/* ── Placeholder color ── */
+::placeholder { color: var(--text-muted); }
+
+/* ── Focus visible ── */
+:focus-visible { outline: 1px solid var(--accent-dim); outline-offset: 2px; }
+
+/* ─────────────────────────────────────────
+   MODALS
+───────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 14, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-mid);
+  border-radius: 3px;
+  max-width: 760px;
+  width: 100%;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2.5rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.modal-header h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--text-primary);
+}
+.modal-date {
+  font-size: 0.67rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+.modal-close {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: 2px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.modal-close:hover { border-color: var(--accent-dim); color: var(--text-primary); }
+
+.modal-body {
+  overflow-y: auto;
+  padding: 2rem 2.5rem 2.5rem;
+  flex: 1;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+.modal-body h4 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 1.75rem 0 0.6rem;
+}
+.modal-body h4:first-child { margin-top: 0; }
+.modal-body p { margin-bottom: 0.85rem; }
+.modal-body ul { padding-left: 1.25rem; margin-bottom: 0.85rem; }
+.modal-body ul li { margin-bottom: 0.35rem; }
+.modal-body strong { color: var(--text-primary); font-weight: 500; }
+.modal-body a { color: var(--accent); text-decoration: none; }
+.modal-body a:hover { text-decoration: underline; }
+
+/* Scrollbar inside modal */
+.modal-body::-webkit-scrollbar { width: 4px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 2px; }
+
+@media (max-width: 680px) {
+  .modal { max-height: 90vh; }
+  .modal-header, .modal-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     MOBILE MENU
+════════════════════════════════════════ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigationsmenü">
+  <button class="mobile-close" id="mobileClose" aria-label="Menü schließen">✕</button>
+  <a href="#services" onclick="closeMobile()">Leistungen</a>
+  <a href="#process" onclick="closeMobile()">Prozess</a>
+  <a href="#about" onclick="closeMobile()">Über uns</a>
+  <a href="#contact" onclick="closeMobile()">Kontakt</a>
+  <a href="#contact" onclick="closeMobile();" style="color: var(--accent); font-size: 1.2rem;">Gespräch buchen</a>
+</div>
+
+<!-- ═══════════════════════════════════════
+     NAV
+════════════════════════════════════════ -->
+<nav id="mainNav" role="navigation" aria-label="Hauptnavigation">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">Lex<span>chain</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Leistungen</a></li>
+      <li><a href="#process">Prozess</a></li>
+      <li><a href="#about">Über uns</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+      <li><a href="#contact" class="nav-cta">Gespräch buchen</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<header class="hero" role="banner">
+  <div class="hero-geo" aria-hidden="true">
+    <svg viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Grid lines -->
+      <line x1="0" y1="100" x2="800" y2="100" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="0" y1="200" x2="800" y2="200" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="0" y1="300" x2="800" y2="300" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="800" y2="400" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="0" y1="500" x2="800" y2="500" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="0" y1="600" x2="800" y2="600" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="0" y1="700" x2="800" y2="700" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="100" y1="0" x2="100" y2="800" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="200" y2="800" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="300" y1="0" x2="300" y2="800" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="400" y1="0" x2="400" y2="800" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="500" y1="0" x2="500" y2="800" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="600" y1="0" x2="600" y2="800" stroke="#c9a96e" stroke-width="0.5"/>
+      <line x1="700" y1="0" x2="700" y2="800" stroke="#c9a96e" stroke-width="0.5"/>
+      <!-- Geometric shapes -->
+      <polygon points="400,80 620,220 620,500 400,640 180,500 180,220" stroke="#c9a96e" stroke-width="0.8" fill="none"/>
+      <polygon points="400,180 540,270 540,450 400,540 260,450 260,270" stroke="#c9a96e" stroke-width="0.5" fill="none"/>
+      <circle cx="400" cy="360" r="160" stroke="#c9a96e" stroke-width="0.5" fill="none"/>
+      <circle cx="400" cy="360" r="90" stroke="#c9a96e" stroke-width="0.5" fill="none" stroke-dasharray="4 6"/>
+      <line x1="180" y1="220" x2="620" y2="500" stroke="#c9a96e" stroke-width="0.4"/>
+      <line x1="620" y1="220" x2="180" y2="500" stroke="#c9a96e" stroke-width="0.4"/>
+      <!-- Corner markers -->
+      <rect x="178" y="218" width="4" height="4" fill="#c9a96e" opacity="0.6"/>
+      <rect x="618" y="218" width="4" height="4" fill="#c9a96e" opacity="0.6"/>
+      <rect x="178" y="498" width="4" height="4" fill="#c9a96e" opacity="0.6"/>
+      <rect x="618" y="498" width="4" height="4" fill="#c9a96e" opacity="0.6"/>
+      <rect x="398" y="78" width="4" height="4" fill="#c9a96e" opacity="0.6"/>
+      <rect x="398" y="638" width="4" height="4" fill="#c9a96e" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Crypto-Rechtsberatung</p>
+      <h1>Rechtliche Klarheit<br>in einer <em>unregulierten</em><br>Landschaft.</h1>
+      <p class="hero-sub">Lexchain Advisory bietet institutionelle Rechtsberatung für Digital-Asset-Inhaber, Web3-Gründer und Family Offices, die sich in regulatorischer Komplexität über Jurisdiktionen hinweg zurechtfinden müssen.</p>
+      <div class="hero-actions">
+        <a href="#" onclick="openModal('contactModal'); return false;" class="btn-primary">Beratungstermin vereinbaren</a>
+        <a href="#services" class="btn-secondary">Unsere Leistungen</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-line" aria-hidden="true">
+    <div class="hero-scroll">
+      <div class="hero-scroll-bar"></div>
+      <span>Scrollen</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     CREDIBILITY BAR
+════════════════════════════════════════ -->
+<div class="cred-bar" aria-label="Wichtige Referenzen">
+  <div class="container">
+    <div class="cred-inner">
+      <div class="cred-item"><span class="cred-dot"></span>Regulierte Jurisdiktionen: EU · VAE · BVI · Cayman · Singapur</div>
+      <div class="cred-item"><span class="cred-dot"></span>Über 50 institutionelle Mandanten</div>
+      <div class="cred-item"><span class="cred-dot"></span>Ausschließlich zugelassene Anwälte</div>
+      <div class="cred-item"><span class="cred-dot"></span>Anwaltsgeheimnis garantiert</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SERVICES
+════════════════════════════════════════ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="reveal">
+        <p class="section-label">Tätigkeitsbereiche</p>
+        <h2 class="section-title">Unsere rechtlichen<br>Leistungen</h2>
+      </div>
+      <p class="section-sub reveal reveal-delay-1">Nicht-handelsbezogene Beratung für das gesamte Spektrum rechtlicher Anforderungen im Bereich digitaler Vermögenswerte.</p>
+    </div>
+
+    <div class="services-grid" role="list">
+
+      <div class="service-card reveal" role="listitem">
+        <p class="service-num">01</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+        <h3>Regulatorische Compliance</h3>
+        <p>MiCA-Bereitschaftsprüfungen, VASP-Registrierungsstrategie und laufende Compliance-Rahmenwerke für EU- und internationale Betreiber.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1" role="listitem">
+        <p class="service-num">02</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+        </svg>
+        <h3>AML/KYC-Programmgestaltung</h3>
+        <p>Maßgeschneiderte Geldwäscherichtlinien, KYC/CDD-Verfahren und Umsetzung der FATF Travel Rule für VASPs und Börsen.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2" role="listitem">
+        <p class="service-num">03</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <h3>Crypto-Vermögensnachfolge</h3>
+        <p>Nachlassplanung für digitale Vermögenswerte: Testamentstrukturen, Treuhandvereinbarungen, Key-Custody-Protokolle und grenzüberschreitende Erbfolgeberatung.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1" role="listitem">
+        <p class="service-num">04</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+        <h3>DAO & Token-Strukturierung</h3>
+        <p>Rechtliche Analyse von Token-Klassifikationen, DAO-Governance-Dokumentation und Haftungsrahmen für dezentrale Protokollteilnehmer.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2" role="listitem">
+        <p class="service-num">05</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        <h3>Grenzüberschreitende Steuerrechtsgutachten</h3>
+        <p>Jurisdiktionsspezifische Rechtsgutachten zu Krypto-Steuerereignissen, Staking-Erträgen, DeFi-Positionen und NFT-Veräußerungen für internationale Mandanten.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3" role="listitem">
+        <p class="service-num">06</p>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <h3>Lizenzierungs- & Jurisdiktionsstrategie</h3>
+        <p>Vergleichende Analyse der Lizenzierungsregimes in VAE, BVI, Cayman, Malta und der Schweiz zur Ermittlung der optimalen Struktur für Ihr Unternehmen.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     HOW WE WORK
+════════════════════════════════════════ -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="process-header reveal">
+      <p class="section-label">Unser Vorgehen</p>
+      <h2 class="section-title">Drei Schritte<br>zur Rechtssicherheit</h2>
+      <p class="section-sub">Ein strukturiertes, diskretes Engagement-Modell für anspruchsvolle Mandanten, die Präzision über Schnelligkeit stellen — obwohl wir beides liefern.</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num-wrap" aria-hidden="true">
+          <span class="step-num">I</span>
+        </div>
+        <h3>Erstbeurteilung</h3>
+        <p>Wir führen ein strukturiertes Erstgespräch durch, um Ihre rechtliche Exposition, Ihren jurisdiktionellen Fußabdruck und Ihre regulatorischen Pflichten zu erfassen. Alle Kommunikationen unterliegen ab dem ersten Kontakt dem Anwaltsgeheimnis.</p>
+      </div>
+
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num-wrap" aria-hidden="true">
+          <span class="step-num">II</span>
+        </div>
+        <h3>Rechtsstrategie-Memo</h3>
+        <p>Unser Team erstellt ein prägnantes, umsetzbares Memo — ohne Standardfloskeln, ohne Absicherungen. Sie erhalten konkrete Empfehlungen mit Risikobewertungen, Jurisdiktionsvergleichen und einem klaren Umsetzungsplan.</p>
+      </div>
+
+      <div class="process-step reveal reveal-delay-4">
+        <div class="step-num-wrap" aria-hidden="true">
+          <span class="step-num">III</span>
+        </div>
+        <h3>Laufende Beratung</h3>
+        <p>Für Mandanten, die eine kontinuierliche Rechtsbegleitung benötigen, bieten wir retainerbasierte Beratung mit dediziertem Anwalt. Bleiben Sie compliant, wenn sich Vorschriften ändern — ohne eigene Rechtsabteilung.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     WHY US
+════════════════════════════════════════ -->
+<section class="why-us" id="about" aria-label="Key statistics">
+  <div class="container">
+    <div class="why-inner">
+      <div class="why-item reveal">
+        <p class="why-stat">12</p>
+        <p class="why-label">Abgedeckte Jurisdiktionen</p>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <p class="why-stat">48h</p>
+        <p class="why-label">Durchschnittliche Antwortzeit</p>
+      </div>
+      <div class="why-item reveal reveal-delay-4">
+        <p class="why-stat">100%</p>
+        <p class="why-label">Anwaltsgeheimnis</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════ -->
+<section class="testimonials">
+  <div class="container">
+    <div class="testimonials-header reveal">
+      <p class="section-label">Mandantenstimmen</p>
+      <h2 class="section-title">Was unsere Mandanten sagen</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">Lexchain hat uns gegeben, was drei andere Kanzleien nicht konnten — eine konkrete Antwort. Ihr MiCA-Bereitschaftsmemo war das klarste Rechtsdokument, das wir in fünf Jahren in diesem Bereich erhalten haben. Keine Unklarheiten, keine übermäßigen Vorbehalte.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-line" aria-hidden="true"></div>
+          <p class="testimonial-who">General Counsel, Kryptofonds · Singapur</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <p class="testimonial-text">Die Nachlassplanung, die Lexchain für unser Family Office durchgeführt hat, war außergewöhnlich. Komplexe Multi-Jurisdiktions-Bestände, Cold-Storage-Überlegungen und Erbfolge über drei Generationen — mit bemerkenswerter Präzision und Vertraulichkeit bewältigt.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-line" aria-hidden="true"></div>
+          <p class="testimonial-who">Principal, Family Office · Zürich</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-left reveal">
+        <p class="section-label">Kontakt aufnehmen</p>
+        <h2 class="section-title">Starten Sie Ihre<br>Beratung</h2>
+        <p>Schildern Sie uns Ihre Situation. Wir antworten innerhalb von 48 Stunden. Alle Kommunikationen unterliegen dem Anwaltsgeheimnis und werden mit höchster Vertraulichkeit behandelt.</p>
+        <div class="contact-detail">
+          <span class="contact-detail-dot" aria-hidden="true"></span>
+          <span>Beratungen auf Wunsch über verschlüsselte Kanäle</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-dot" aria-hidden="true"></span>
+          <span>Retainer- und projektbasierte Mandate verfügbar</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-dot" aria-hidden="true"></span>
+          <span>compliance@lexchain.pro</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-dot" aria-hidden="true"></span>
+          <span>+49 152 16059921</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-dot" aria-hidden="true"></span>
+          <span>Am Postbahnhof 17<br>10243 Berlin, Deutschland</span>
+        </div>
+      </div>
+
+      <div class="contact-right reveal reveal-delay-2">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Vorname</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Johann" autocomplete="given-name" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Nachname</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Hoffmann" autocomplete="family-name" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" name="email" placeholder="j.hoffmann@beispiel.de" autocomplete="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="serviceType">Gewünschte Leistung</label>
+            <select id="serviceType" name="serviceType" required>
+              <option value="" disabled selected>Leistungsbereich auswählen</option>
+              <option value="regulatory">Regulatorische Compliance (MiCA/VASP)</option>
+              <option value="aml">AML/KYC-Programmgestaltung</option>
+              <option value="inheritance">Crypto-Nachlassplanung & Erbrecht</option>
+              <option value="dao">DAO & Token-Rechtsstrukturierung</option>
+              <option value="tax">Grenzüberschreitendes Steuerrechtsgutachten</option>
+              <option value="licensing">Lizenzierungs- & Jurisdiktionsstrategie</option>
+              <option value="other">Sonstiges / Allgemeine Anfrage</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="brief">Kurze Beschreibung Ihrer Situation</label>
+            <textarea id="brief" name="brief" placeholder="Bitte beschreiben Sie kurz Ihre rechtliche Frage oder Situation. Alle Angaben sind streng vertraulich." rows="5" required></textarea>
+          </div>
+
+          <p class="form-note">Mit dem Absenden dieses Formulars bestätigen Sie, dass es sich um eine Erstanfrage und kein formelles Mandat handelt. Das Mandatsverhältnis entsteht erst mit schriftlicher Vereinbarung.</p>
+
+          <div class="form-submit">
+            <p class="form-error" id="formError" role="alert" aria-live="polite"></p>
+            <button type="submit" class="btn-primary" style="margin-left: auto;">Anfrage senden</button>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess" role="status">
+          <p>Ihre Anfrage ist eingegangen.</p>
+          <span>Ein Mitglied unseres Teams wird Sie innerhalb von 48 Stunden über die angegebene E-Mail-Adresse kontaktieren.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Lex<span>chain</span></a>
+        <p class="footer-tagline">Rechtsberatung für das digitale Vermögenszeitalter. Präzise, vertraulich, international.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="openModal('privacyModal'); return false;">Datenschutzerklärung</a></li>
+        <li><a href="#" onclick="openModal('termsModal'); return false;">Mandatsbedingungen</a></li>
+        <li><a href="#" onclick="openModal('contactModal'); return false;">Kontakt</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">
+        Lexchain Advisory ist eine Rechtsberatungsgesellschaft. Nichts auf dieser Website stellt eine Finanz- oder Anlageberatung oder eine Aufforderung zum Kauf oder Verkauf von Vermögenswerten dar. Anwaltswerbung. Frühere Ergebnisse garantieren keine ähnlichen Resultate in Ihrem Fall. Lexchain Advisory ist in mehreren Jurisdiktionen über verbundene lizenzierte Rechtseinheiten tätig. Alle Kommunikationen mit Anwälten unterliegen den anwendbaren Berufsordnungen.
+      </p>
+      <p class="footer-copy">© 2025 Lexchain Advisory</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════
+     CONTACT MODAL
+════════════════════════════════════════ -->
+<div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+  <div class="modal" style="max-width: 520px;">
+    <div class="modal-header">
+      <div>
+        <h3 id="contactModalTitle">Kontakt aufnehmen</h3>
+        <p class="modal-date">Wir antworten innerhalb von 48 Stunden</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('contactModal')" aria-label="Close Contact">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex; flex-direction:column; gap: 1.5rem;">
+
+        <div style="display:flex; gap: 1rem; align-items: flex-start;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" style="flex-shrink:0; margin-top:2px;" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <div>
+            <p style="font-size:0.67rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.3rem;">E-Mail</p>
+            <a href="mailto:compliance@lexchain.pro" style="color:var(--text-primary); font-size:0.95rem;">compliance@lexchain.pro</a>
+          </div>
+        </div>
+
+        <div style="display:flex; gap: 1rem; align-items: flex-start;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" style="flex-shrink:0; margin-top:2px;" aria-hidden="true"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          <div>
+            <p style="font-size:0.67rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.3rem;">Telefon</p>
+            <a href="tel:+4915216059921" style="color:var(--text-primary); font-size:0.95rem;">+49 152 16059921</a>
+          </div>
+        </div>
+
+        <div style="display:flex; gap: 1rem; align-items: flex-start;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" style="flex-shrink:0; margin-top:2px;" aria-hidden="true"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <div>
+            <p style="font-size:0.67rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.3rem;">Büro</p>
+            <p style="color:var(--text-primary); font-size:0.95rem; line-height:1.6;">Am Postbahnhof 17<br>10243 Berlin<br>Deutschland</p>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top:0.25rem;">
+          <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.7;">Alle Kommunikationen unterliegen dem Anwaltsgeheimnis. Beratungen sind auf Wunsch über verschlüsselte Kanäle verfügbar.</p>
+        </div>
+
+        <a href="#contact" onclick="closeModal('contactModal');" class="btn-primary" style="text-align:center; display:block;">Anfrage senden</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PRIVACY POLICY MODAL
+════════════════════════════════════════ -->
+<div class="modal-overlay" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3 id="privacyTitle">Datenschutzerklärung</h3>
+        <p class="modal-date">Gültig ab: 1. Januar 2025</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('privacyModal')" aria-label="Close Privacy Policy">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>1. Einleitung</h4>
+      <p>Lexchain Advisory („wir", „uns" oder „die Kanzlei") verpflichtet sich zum Schutz Ihrer personenbezogenen Daten. Diese Datenschutzerklärung erläutert, wie wir Ihre Daten erheben, verwenden, offenlegen und schützen, wenn Sie unsere Website besuchen oder unsere Rechtsdienstleistungen in Anspruch nehmen.</p>
+      <p>Durch die Nutzung unserer Website oder die Kontaktaufnahme mit uns stimmen Sie den in dieser Erklärung beschriebenen Praktiken zu.</p>
+
+      <h4>2. Erhobene Daten</h4>
+      <p>Wir können folgende Kategorien personenbezogener Daten erheben:</p>
+      <ul>
+        <li><strong>Kontaktdaten:</strong> Name, E-Mail-Adresse, Telefonnummer und Postanschrift.</li>
+        <li><strong>Anfragedaten:</strong> Der Inhalt von Nachrichten, die Sie über unser Kontaktformular senden, einschließlich Beschreibungen Ihrer rechtlichen Situation.</li>
+        <li><strong>Nutzungsdaten:</strong> IP-Adresse, Browsertyp, besuchte Seiten und Zeitstempel, die automatisch über Standard-Server-Logs erhoben werden.</li>
+        <li><strong>Kommunikationsaufzeichnungen:</strong> Korrespondenz per E-Mail oder über verschlüsselte Kanäle für Zwecke der Mandatsbearbeitung.</li>
+      </ul>
+
+      <h4>3. Verwendung Ihrer Daten</h4>
+      <p>Wir verwenden Ihre personenbezogenen Daten, um:</p>
+      <ul>
+        <li>Anfragen zu beantworten und potenzielle Mandate zu prüfen;</li>
+        <li>unsere Rechtsdienstleistungen bereitzustellen, zu verwalten und zu verbessern;</li>
+        <li>gesetzlichen und regulatorischen Pflichten nachzukommen;</li>
+        <li>die Sicherheit und Integrität unserer Systeme zu wahren.</li>
+      </ul>
+      <p>Wir verkaufen, vermieten oder teilen Ihre personenbezogenen Daten nicht zu Marketingzwecken mit Dritten.</p>
+
+      <h4>4. Anwaltsgeheimnis</h4>
+      <p>Alle inhaltlichen Kommunikationen mit unseren Anwälten sind durch das Anwaltsgeheimnis im größtmöglichen gesetzlich zulässigen Umfang geschützt. Wir behandeln alle Mandanteninformationen mit höchster Vertraulichkeit.</p>
+
+      <h4>5. Datenspeicherung</h4>
+      <p>Wir speichern personenbezogene Daten nur so lange, wie es zur Erfüllung der Zwecke, für die sie erhoben wurden, erforderlich ist, einschließlich etwaiger gesetzlicher, regulatorischer oder Meldepflichten. Anfragedaten von nicht mandatierten Kontakten werden in der Regel innerhalb von 24 Monaten gelöscht.</p>
+
+      <h4>6. Internationale Datenübermittlungen</h4>
+      <p>Als international tätige Kanzlei können Ihre Daten in anderen Ländern als Ihrem Wohnsitzland verarbeitet werden. Wir treffen geeignete Schutzmaßnahmen, einschließlich Standardvertragsklauseln, soweit dies nach anwendbarem Recht erforderlich ist.</p>
+
+      <h4>7. Ihre Rechte</h4>
+      <p>Je nach Ihrer Jurisdiktion haben Sie möglicherweise das Recht, auf Ihre personenbezogenen Daten zuzugreifen, sie zu berichtigen, zu löschen oder die Verarbeitung einzuschränken oder Ihre Einwilligung zu widerrufen. Um diese Rechte auszuüben, wenden Sie sich bitte an <a href="mailto:compliance@lexchain.pro">compliance@lexchain.pro</a>.</p>
+
+      <h4>8. Cookies</h4>
+      <p>Unsere Website verwendet ausschließlich technisch notwendige Cookies, die für den ordnungsgemäßen Betrieb erforderlich sind. Wir verwenden keine Tracking- oder Werbe-Cookies. Für rein technische Cookies ist kein Cookie-Einwilligungsbanner erforderlich.</p>
+
+      <h4>9. Sicherheit</h4>
+      <p>Wir setzen branchenübliche technische und organisatorische Maßnahmen ein, um Ihre Daten vor unbefugtem Zugriff, Veränderung, Offenlegung oder Vernichtung zu schützen. Mandanten können auf Wunsch Kommunikation über verschlüsselte Kanäle anfordern.</p>
+
+      <h4>10. Kontakt</h4>
+      <p>Für datenschutzbezogene Anfragen wenden Sie sich bitte an:<br>
+      <strong>Lexchain Advisory</strong><br>
+      Am Postbahnhof 17<br>
+      10243 Berlin, Deutschland<br>
+      E-Mail: <a href="mailto:compliance@lexchain.pro">compliance@lexchain.pro</a><br>
+      Telefon: +49 152 16059921</p>
+
+      <h4>11. Änderungen dieser Erklärung</h4>
+      <p>Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Wesentliche Änderungen werden durch ein aktualisiertes Datum kenntlich gemacht. Die weitere Nutzung unserer Website nach Änderungen gilt als Zustimmung zur geänderten Erklärung.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     TERMS OF ENGAGEMENT MODAL
+════════════════════════════════════════ -->
+<div class="modal-overlay" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3 id="termsTitle">Mandatsbedingungen</h3>
+        <p class="modal-date">Gültig ab: 1. Januar 2025</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('termsModal')" aria-label="Close Terms of Engagement">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>1. Geltungsbereich und Anwendung</h4>
+      <p>Diese Mandatsbedingungen („Bedingungen") regeln die Erbringung von Rechtsberatungsleistungen durch Lexchain Advisory („die Kanzlei") gegenüber ihren Mandanten. Mit der Beauftragung der Kanzlei erklären Sie sich mit diesen Bedingungen in ihrer Gesamtheit einverstanden.</p>
+      <p>Diese Bedingungen sind zusammen mit einem etwaigen schriftlichen Mandatsschreiben oder Retainer-Vertrag zu lesen, der gesondert übergeben wird.</p>
+
+      <h4>2. Begründung des Mandatsverhältnisses</h4>
+      <p>Die Übermittlung einer Anfrage über unsere Website begründet noch kein Mandatsverhältnis. Ein Mandatsverhältnis entsteht erst durch: (a) die schriftliche Mandatsbestätigung durch die Kanzlei sowie (b) die Unterzeichnung eines formellen Mandatsschreibens oder Retainer-Vertrags durch einen bevollmächtigten Vertreter der Kanzlei.</p>
+
+      <h4>3. Leistungsumfang</h4>
+      <p>Die Kanzlei erbringt nicht-handelsgerichtliche Rechtsberatungsleistungen im Zusammenhang mit digitalen Vermögenswerten, einschließlich regulatorischer Compliance, AML/KYC-Programmgestaltung, Nachlassplanung für Krypto-Assets, DAO- und Token-Strukturierung, grenzüberschreitenden Steuerrechtsgutachten sowie Lizenzierungsstrategie. Der Leistungsumfang eines jeden Mandats wird im jeweiligen Mandatsschreiben festgelegt.</p>
+      <p>Unsere Beratung stellt keine Finanz-, Anlage- oder Steuerberatung dar. Wir empfehlen, bei Bedarf unabhängige Finanz- oder Steuerberatung einzuholen.</p>
+
+      <h4>4. Honorare und Zahlung</h4>
+      <p>Die Honorare sind in jedem Mandatsschreiben festgelegt und können projekt-, stunden- oder retainerbasiert vereinbart werden. Rechnungen sind innerhalb von vierzehn (14) Kalendertagen nach Ausstellung fällig, sofern nichts anderes vereinbart wurde. Die Kanzlei behält sich das Recht vor, bei Zahlungsverzug die Arbeit auszusetzen.</p>
+
+      <h4>5. Vertraulichkeit</h4>
+      <p>Die Kanzlei behandelt alle Mandanteninformationen streng vertraulich gemäß den anwendbaren Berufsordnungen. Alle Kommunikationen mit mandatierten Mandanten unterliegen dem Anwaltsgeheimnis. Die Kanzlei gibt Mandanteninformationen nur weiter, soweit dies gesetzlich, durch Gerichtsbeschluss oder eine zuständige Aufsichtsbehörde vorgeschrieben ist.</p>
+
+      <h4>6. Interessenkonflikte</h4>
+      <p>Vor der Annahme eines Mandats führt die Kanzlei gemäß den Berufsstandards eine Interessenkonfliktprüfung durch. Mandanten sind verpflichtet, unverzüglich alle Beziehungen oder Umstände offenzulegen, die zu einem Interessenkonflikt führen könnten.</p>
+
+      <h4>7. Haftungsbeschränkung</h4>
+      <p>Die Gesamthaftung der Kanzlei für Ansprüche, die aus den erbrachten Leistungen entstehen oder damit zusammenhängen, ist auf die Gesamthonorare beschränkt, die der Mandant für die betreffende Angelegenheit gezahlt hat. Die Kanzlei haftet nicht für mittelbare, Folge- oder Begleitschäden.</p>
+      <p>Diese Bedingungen schränken die Haftung für Betrug, vorsätzliches Fehlverhalten oder sonstige gesetzlich nicht ausschließbare Haftung nicht ein.</p>
+
+      <h4>8. Geistiges Eigentum</h4>
+      <p>Alle von der Kanzlei erstellten Arbeitsergebnisse, Gutachten, Analysen und Dokumente verbleiben bis zur vollständigen Honorarzahlung im Eigentum der Kanzlei; danach geht das Eigentum für den vorgesehenen Verwendungszweck auf den Mandanten über. Arbeitsergebnisse dürfen ohne vorherige schriftliche Zustimmung der Kanzlei nicht an Dritte weitergegeben werden.</p>
+
+      <h4>9. Kündigung</h4>
+      <p>Jede Partei kann ein Mandat durch schriftliche Mitteilung beenden. Die Kanzlei kann ein Mandat gemäß den anwendbaren Berufsordnungen niederlegen. Bei Beendigung bleibt der Mandant für alle bis zum Beendigungsdatum angefallenen Honorare verantwortlich.</p>
+
+      <h4>10. Keine Erfolgsgarantie</h4>
+      <p>Rechtliche Ergebnisse können nicht garantiert werden. Frühere Erfolge für andere Mandanten garantieren keine ähnlichen Ergebnisse in Ihrer Angelegenheit. Alle Gutachten und Beratungen werden auf Grundlage der zum Zeitpunkt des Mandats verfügbaren Informationen erteilt.</p>
+
+      <h4>11. Anwendbares Recht</h4>
+      <p>Diese Bedingungen unterliegen dem Recht der Bundesrepublik Deutschland und sind entsprechend auszulegen. Für Streitigkeiten aus oder im Zusammenhang mit diesen Bedingungen ist die ausschließliche Zuständigkeit der deutschen Gerichte gegeben.</p>
+
+      <h4>12. Kontakt</h4>
+      <p>Bei Fragen zu diesen Bedingungen wenden Sie sich bitte an:<br>
+      <strong>Lexchain Advisory</strong><br>
+      Am Postbahnhof 17<br>
+      10243 Berlin, Deutschland<br>
+      E-Mail: <a href="mailto:compliance@lexchain.pro">compliance@lexchain.pro</a><br>
+      Telefon: +49 152 16059921</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Nav scroll ──
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// ── Mobile menu ──
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+function openMobile() {
+  mobileMenu.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobile() {
+  mobileMenu.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+hamburger.addEventListener('click', openMobile);
+mobileClose.addEventListener('click', closeMobile);
+
+// ── Scroll reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => observer.observe(el));
+
+// ── Form validation & submission ──
+const form = document.getElementById('contactForm');
+const formError = document.getElementById('formError');
+const formSuccess = document.getElementById('formSuccess');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  formError.textContent = '';
+
+  const firstName = form.firstName.value.trim();
+  const lastName = form.lastName.value.trim();
+  const email = form.email.value.trim();
+  const serviceType = form.serviceType.value;
+  const brief = form.brief.value.trim();
+
+  // Basic validation
+  if (!firstName || !lastName) {
+    formError.textContent = 'Bitte geben Sie Ihren vollständigen Namen ein.';
+    form.firstName.focus();
+    return;
+  }
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRe.test(email)) {
+    formError.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+    form.email.focus();
+    return;
+  }
+  if (!serviceType) {
+    formError.textContent = 'Bitte wählen Sie einen Leistungsbereich aus.';
+    form.serviceType.focus();
+    return;
+  }
+  if (brief.length < 20) {
+    formError.textContent = 'Bitte geben Sie eine kurze Beschreibung ein (mindestens 20 Zeichen).';
+    form.brief.focus();
+    return;
+  }
+
+  // Simulate submission
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Wird gesendet…';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    form.style.display = 'none';
+    formSuccess.style.display = 'block';
+  }, 1200);
+});
+
+// ── Modals ──
+function openModal(id) {
+  const overlay = document.getElementById(id);
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // focus the close button for accessibility
+  overlay.querySelector('.modal-close').focus();
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal(overlay.id);
+  });
+});
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(o => closeModal(o.id));
+  }
+});
+</script>
+</body>
+</html>
